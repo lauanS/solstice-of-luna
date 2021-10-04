@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraController : MonoBehaviour
+{
+    [Header("Link o objeto")]
+    public GameObject target;
+    private Vector3 positionTarget;
+
+
+    [Header("Dados da Camera")]
+    public float speed;
+    // Start is called before the first frame update
+    void Start()
+    {
+        speed = 2;
+        target = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        positionTarget = new Vector3(target.transform.position.x, target.transform.position.y, transform.position.z);
+
+        Vector3 tempPosition = Vector3.Lerp(transform.position, positionTarget, speed);
+
+        transform.position = tempPosition;
+    }
+}
