@@ -48,8 +48,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isWalking", isWalking);
     }
 
-    public bool walking()
-    {
+    public bool walking() {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) ||
             Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) ||
             Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) ||
