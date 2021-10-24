@@ -13,38 +13,42 @@ public class PlayerController : MonoBehaviour
     void Start() {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        speed = 2;
+        speed = 3;
     }
 
     void Update() {
         isWalking = walking();
 
-        if (isWalking)
-        {
+        float moveX = 0;
+        float moveY = 0;
+
+        if (isWalking) {
             anim.SetFloat("input_x", Input.GetAxisRaw("Horizontal"));
             // anim.SetFloat("input_y", Input.GetAxisRaw("Vertical"));
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {
-                rb.velocity = new Vector2(rb.velocity.x, 1 * speed);
+                moveY = +1f;
                 // anim.SetFloat("input_y", Input.GetAxisRaw("Vertical"));
             }
             if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
-                rb.velocity = new Vector2(rb.velocity.x, -1 * speed);
+                moveY = -1f;
                 // anim.SetFloat("input_y", Input.GetAxisRaw("Vertical"));
             }
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {
-                rb.velocity = new Vector2(-1 * speed, rb.velocity.y);
+                moveX = -1f;
                 // anim.SetFloat("input_x", Input.GetAxisRaw("Horizontal"));
             }
             if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-                rb.velocity = new Vector2(1 * speed, rb.velocity.y);
+                moveX = +1f;
                 // anim.SetFloat("input_x", Input.GetAxisRaw("Horizontal"));
             }
+            move(moveX, moveY);
         }
         else {
-            rb.velocity = new Vector3(0, 0, 0 );
+            rb.velocity = new Vector3(0, 0, 0);
             // anim.SetFloat("input_x", 0);
             // anim.SetFloat("input_y", 0);
         }
+
         anim.SetBool("isWalking", isWalking);
     }
 
@@ -56,5 +60,9 @@ public class PlayerController : MonoBehaviour
             return true;
         }
             return false;
+    }
+
+    private void move(float x, float y) {
+        rb.velocity = (new Vector2(x, y).normalized) * speed;
     }
 }
