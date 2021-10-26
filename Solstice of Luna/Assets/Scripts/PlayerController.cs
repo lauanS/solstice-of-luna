@@ -4,19 +4,50 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private enum State {
+        Normal,
+        Attacking
+    }
+
     public Rigidbody2D rb;
     public bool isWalking;
     public float speed;
     Animator anim;
+    
+    private State state;
     
 
     void Start() {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         speed = 3;
+
+        state = State.Normal;
     }
 
     void Update() {
+        switch (state) {
+        case State.Normal:
+            movement();
+            attack();
+            break;
+        case State.Attacking:
+            break;
+        }
+        
+    }
+
+    public bool walking() {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) ||
+            Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) ||
+            Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) ||
+            Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
+            return true;
+        }
+            return false;
+    }
+
+    private void movement() {
         isWalking = walking();
 
         float moveX = 0;
@@ -41,7 +72,7 @@ public class PlayerController : MonoBehaviour
                 moveX = +1f;
                 // anim.SetFloat("input_x", Input.GetAxisRaw("Horizontal"));
             }
-            move(moveX, moveY);
+            rb.velocity = (new Vector2(moveX, moveY).normalized) * speed;
         }
         else {
             rb.velocity = new Vector3(0, 0, 0);
@@ -52,17 +83,24 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("isWalking", isWalking);
     }
 
-    public bool walking() {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) ||
-            Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) ||
-            Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) ||
-            Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
-            return true;
-        }
-            return false;
-    }
+    private void attack() {
+        if (Input.GetMouseButtonDown(0)) {
+            Vector3 mousePosition = UtilsClass.getMouseWorldPosition();
+            Vector3 mouseDirection = (mousePosition - transform.position).normalized;
 
-    private void move(float x, float y) {
-        rb.velocity = (new Vector2(x, y).normalized) * speed;
+            float attackOffset = 0.2f;
+
+            Vector3 attackPosition = transform.position + mouseDirection * attackOffset;
+
+            float attackRange = 0.8f;
+
+            Enemy enemy = Enemy.GetClosestEnemy(attackPosition, attackRange);
+
+            if (enemy != null) enemy.takeDamage(5);
+
+            // Para o personagem
+            rb.velocity = new Vector3(0, 0, 0);
+            // anim.attack<>
+        }
     }
 }
