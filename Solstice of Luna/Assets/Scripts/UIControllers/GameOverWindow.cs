@@ -20,4 +20,8 @@ public class GameOverWindow : MonoBehaviour {
     public static void ShowGameOver() {
         instance.show();
     }
+
+    public static void HideGameOver() {
+        instance.hide();
+    }
 }

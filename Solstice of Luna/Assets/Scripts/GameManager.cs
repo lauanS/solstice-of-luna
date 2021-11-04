@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public Transform pfSlime;
@@ -22,8 +23,15 @@ public class GameManager : MonoBehaviour {
         GameOverWindow.ShowGameOver();
     }
 
+    public void reloadGame() {
+        playGame();
+        GameOverWindow.HideGameOver();
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     private void callOnPlayerDie(object sender, EventArgs e) {
-        gameOver();
+        gameOver();        
     }
 
     public void pauseGame() {

@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class UtilsClass
-{
+public static class UtilsClass {
     static Camera mainCamera = Camera.main;
 
     public static Vector3 getMouseWorldPosition() {
