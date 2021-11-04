@@ -8,9 +8,8 @@ public class Enemy : MonoBehaviour {
     public HealthSystem healthSystem;
     public Transform pfHealthBar;
     public Transform defaultEnemy;
-    private static Transform pfSlime;
-
     private static List<Enemy> enemyList;
+
     void Start() {
         anim = GetComponent<Animator>();
 
@@ -22,12 +21,6 @@ public class Enemy : MonoBehaviour {
         healthBar.transform.SetParent(gameObject.transform);
 
         healthBar.Setup(healthSystem);
-
-        pfSlime = defaultEnemy;
-    }
-
-    void Update() {
-        
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
@@ -37,10 +30,12 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    public static Enemy Create(Vector3 position) {
-        Transform enemyTransform = Instantiate(pfSlime, position, Quaternion.identity);
+    public static Enemy Create(Vector3 position, Transform pfEnemy) {
+        Transform enemyTransform = Instantiate(pfEnemy, position, Quaternion.identity);
 
         Enemy enemy = enemyTransform.GetComponent<Enemy>();
+
+        Debug.Log(">" + enemy);
         
         if (enemyList == null) enemyList = new List<Enemy>();
         enemyList.Add(enemy);
@@ -51,9 +46,9 @@ public class Enemy : MonoBehaviour {
     public void takeDamage(int damage) {
         healthSystem.damage(damage);
         if (healthSystem.getCurrentHealth() == 0) {
+            enemyList.Remove(this);
             Destroy(gameObject);
         }
-           
     }
 
     public static Enemy GetClosestEnemy(Vector3 position, float range) {

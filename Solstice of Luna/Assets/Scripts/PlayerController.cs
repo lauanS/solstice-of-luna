@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
             Enemy enemy = Enemy.GetClosestEnemy(attackPosition, attackRange);
 
-            if (enemy != null) enemy.takeDamage(5);
+            if (enemy != null) enemy.takeDamage(20);
 
             // Para o personagem
             rb.velocity = new Vector3(0, 0, 0);

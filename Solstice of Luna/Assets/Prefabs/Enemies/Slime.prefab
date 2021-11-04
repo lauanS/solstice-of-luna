@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3884725967535120968}
   - component: {fileID: 3884725967535121015}
   - component: {fileID: 3884725967535120969}
+  - component: {fileID: 3443322030838502872}
   m_Layer: 8
   m_Name: Slime
   m_TagString: Enemy
@@ -133,3 +134,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pfHealthBar: {fileID: 3989126087688655838, guid: 77ec34e5621626e43a652ab915fa4b97, type: 3}
+  defaultEnemy: {fileID: 3884725967535121014}
+--- !u!114 &3443322030838502872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3884725967535121012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce071eadad359c4d8e97368d57c9e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

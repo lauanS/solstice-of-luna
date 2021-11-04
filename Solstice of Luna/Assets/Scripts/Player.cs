@@ -21,8 +21,8 @@ public class Player : MonoBehaviour
         healthBar.Setup(healthSystem);        
     }
 
-    public void takeDamage() {
-        healthSystem.damage(10);
+    public void takeDamage(int damage) {
+        healthSystem.damage(damage);
         if (healthSystem.getCurrentHealth() == 0) {
             Destroy(gameObject);
         }
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Enemy") {
-            takeDamage();
+            takeDamage(25);
         }
     }
 }
