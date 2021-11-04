@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
     private HealthSystem healthSystem;
     public Transform pfHealthBar;
+    public event EventHandler OnPlayerDie;
 
     void Start() {
         healthSystem = new HealthSystem(100);
@@ -18,19 +20,23 @@ public class Player : MonoBehaviour
 
         healthBar.transform.SetParent(gameObject.transform);
         
-        healthBar.Setup(healthSystem);        
+        healthBar.Setup(healthSystem);
     }
 
     public void takeDamage(int damage) {
         healthSystem.damage(damage);
         if (healthSystem.getCurrentHealth() == 0) {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Enemy") {
             takeDamage(25);
+
+            if (healthSystem.getCurrentHealth() == 0) {
+                if (OnPlayerDie != null) OnPlayerDie(this, EventArgs.Empty);
+            }
         }
     }
 }

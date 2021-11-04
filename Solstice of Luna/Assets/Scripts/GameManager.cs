@@ -1,17 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour {
     public Transform pfSlime;
+    private GameObject player;
     void Start() {
         Enemy slime = Enemy.Create(new Vector3(0, 0, 0), pfSlime);
         Enemy slime2 = Enemy.Create(new Vector3(1, 1, 0), pfSlime);
         Enemy slime3 = Enemy.Create(new Vector3(-1.5f, 1.5f, 0), pfSlime);
+
+        player = GameObject.FindGameObjectWithTag("Player");
+        Player playerScript = player.GetComponent<Player>();
+
+        playerScript.OnPlayerDie += callOnPlayerDie;
     }
 
     public void gameOver() {
         pauseGame();
+        GameOverWindow.ShowGameOver();
+    }
+
+    private void callOnPlayerDie(object sender, EventArgs e) {
+        gameOver();
     }
 
     public void pauseGame() {
