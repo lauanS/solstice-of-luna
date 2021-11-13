@@ -7,7 +7,15 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     public Transform pfSlime;
     private GameObject player;
+
     void Start() {
+        initGame();
+    }
+
+    private void initGame() {
+        UtilsClass.Setup();
+        Enemy.Setup();
+
         Enemy slime = Enemy.Create(new Vector3(0, 0, 0), pfSlime);
         Enemy slime2 = Enemy.Create(new Vector3(1, 1, 0), pfSlime);
         Enemy slime3 = Enemy.Create(new Vector3(-1.5f, 1.5f, 0), pfSlime);
