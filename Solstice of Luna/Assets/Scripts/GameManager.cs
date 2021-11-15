@@ -16,9 +16,15 @@ public class GameManager : MonoBehaviour {
         UtilsClass.Setup();
         Enemy.Setup();
 
-        Enemy slime = Enemy.Create(new Vector3(0, 0, 0), pfSlime);
-        Enemy slime2 = Enemy.Create(new Vector3(1, 1, 0), pfSlime);
-        Enemy slime3 = Enemy.Create(new Vector3(-1.5f, 1.5f, 0), pfSlime);
+        Enemy slime = Enemy.Create(new Vector3(-20, -26, 0), pfSlime);
+        Enemy slime2 = Enemy.Create(new Vector3(-15.5f, -26.9f, 0), pfSlime);
+        Enemy slime3 = Enemy.Create(new Vector3(-11.5f, -26.9f, 0), pfSlime);
+        Enemy slime4 = Enemy.Create(new Vector3(-9.5f, -26.9f, 0), pfSlime);
+        Enemy slime5 = Enemy.Create(new Vector3(-7.6f, -26.9f, 0), pfSlime);
+        Enemy slime6 = Enemy.Create(new Vector3(-2.5f, -26.9f, 0), pfSlime);
+        Enemy slime7 = Enemy.Create(new Vector3(5f, -26.9f, 0), pfSlime);
+        Enemy slime8 = Enemy.Create(new Vector3(9f, -26.9f, 0), pfSlime);
+        Enemy slime9 = Enemy.Create(new Vector3(15f, -26.9f, 0), pfSlime);
 
         player = GameObject.FindGameObjectWithTag("Player");
         Player playerScript = player.GetComponent<Player>();
