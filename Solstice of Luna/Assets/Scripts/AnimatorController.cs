@@ -1,11 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimatorController : MonoBehaviour {
     public bool isWalking;
-    public float speed;
+    public bool isAttacking;
+
+    /* Components */
     private Animator anim;
+    private SpriteRenderer rend;
     private Player player;
     
 
@@ -13,8 +17,10 @@ public class AnimatorController : MonoBehaviour {
         anim = GetComponent<Animator>();
         player = GetComponent<Player>();
 
-        
-        speed = 3;
+        rend = GetComponent<SpriteRenderer>();
+
+        player.OnAttack += playAttack;
+        player.OnTakeDamage += playTakeDamage;
     }
 
     private void playMovementAnim() {
@@ -25,7 +31,38 @@ public class AnimatorController : MonoBehaviour {
         anim.SetBool("isWalking", isWalking);
     }
 
-    private void playAttackAnim() {
-        
+    private void playAttack(object sender, EventArgs e) {
+        StartCoroutine(playAttackAnim());
+    }
+
+    private void playTakeDamage(object sender, EventArgs e) {
+        StartCoroutine(playTakeDamageAnim());
+    }
+
+    private IEnumerator playAttackAnim() {
+        anim.SetBool("isAttacking", true);
+
+        yield return new WaitForSeconds(0.5f);
+        anim.SetBool("isAttacking", false);
+    }
+
+    private IEnumerator playTakeDamageAnim() {
+        Color regularColor = rend.material.color;
+        Color flashColor = regularColor;
+        flashColor.a = 0.5f;
+
+        int flashCount = 0;
+        float flashDuration = 0.3f;
+        int numberOfFlashs = 3;
+
+        while (flashCount < numberOfFlashs) {
+            rend.material.color = flashColor;
+            yield return new WaitForSeconds(flashDuration);
+
+            rend.material.color = regularColor;
+            yield return new WaitForSeconds(flashDuration);
+
+            flashCount++;            
+        }
     }
 }

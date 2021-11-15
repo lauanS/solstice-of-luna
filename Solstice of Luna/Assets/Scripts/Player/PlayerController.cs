@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class PlayerController : MonoBehaviour {
     Animator anim;
     
     private State state;
+
+    public event EventHandler OnAttack;
     
 
     void Start() {
@@ -99,7 +102,11 @@ public class PlayerController : MonoBehaviour {
 
             // Para o personagem
             rb.velocity = new Vector3(0, 0, 0);
-            // anim.attack<>
+            emitAttack();
         }
+    }
+
+    private void emitAttack() {
+        if (OnAttack != null) OnAttack(this, EventArgs.Empty);
     }
 }
