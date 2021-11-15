@@ -9,13 +9,15 @@ public class Player : MonoBehaviour {
 
     /* Events */
     public event EventHandler OnPlayerDie;
+    public event EventHandler OnTakeDamage;
 
     void Start() {
         // Inicializa o healthSystem
         healthSystem = new HealthSystem(100);
 
-        // Inscreve-se no evento para saber quando o Player morre
+        // Inscreve-se nos eventos do healthSystem
         healthSystem.OnHealthOver += emitPlayerDie;
+        healthSystem.OnTakeDamage += emitTakeDamage;
 
         // Setup da barra de vida
         Vector3 healthBarPosition = gameObject.transform.position + new Vector3(0.4f, 0.1f, 0);
@@ -41,5 +43,9 @@ public class Player : MonoBehaviour {
     private void emitPlayerDie(object sender, EventArgs e) {
         gameObject.SetActive(false);
         if (OnPlayerDie != null) OnPlayerDie(this, e);
+    }
+
+    private void emitTakeDamage(object sender, EventArgs e) {
+        if (OnTakeDamage != null) OnTakeDamage(this, e);
     }
 }
