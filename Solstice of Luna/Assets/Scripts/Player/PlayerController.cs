@@ -35,8 +35,7 @@ public class PlayerController : MonoBehaviour {
             break;
         case State.Attacking:
             break;
-        }
-        
+        } 
     }
 
     public bool walking() {

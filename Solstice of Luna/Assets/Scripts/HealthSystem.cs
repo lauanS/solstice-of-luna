@@ -37,7 +37,7 @@ public class HealthSystem {
     public void damage (int value) {
         emitTakeDamage();
 
-        if (currentHealth - value < 0) {
+        if (currentHealth - value <= 0) {
             currentHealth = 0;
             emitHealthOver();
             return;

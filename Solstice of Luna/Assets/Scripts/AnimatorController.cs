@@ -12,7 +12,6 @@ public class AnimatorController : MonoBehaviour {
     private SpriteRenderer rend;
     private Player player;
     
-
     void Start() {
         anim = GetComponent<Animator>();
         player = GetComponent<Player>();
