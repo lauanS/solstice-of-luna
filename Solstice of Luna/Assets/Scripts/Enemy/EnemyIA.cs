@@ -6,6 +6,8 @@ public class EnemyIA : MonoBehaviour {
     private Vector3 startingPosition;
     private Vector3 roamPosition;
 
+    private bool haveControl;
+
     private float speed = 0.025f;
     private GameObject player;
     private Rigidbody2D rb;
@@ -16,6 +18,8 @@ public class EnemyIA : MonoBehaviour {
 
         startingPosition = transform.position;
         roamPosition = getRoamingPosition();
+
+        haveControl = true;
     }
 
     private void Update() {
@@ -27,7 +31,7 @@ public class EnemyIA : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        moveToTarget();
+        if (haveControl) moveToTarget();
     }
 
     private void moveToTarget() {
@@ -48,5 +52,18 @@ public class EnemyIA : MonoBehaviour {
         } else {
             speed = 0.025f;
         }
+    }
+
+    public void loseControl(float duration) {
+        if (duration > 0) StartCoroutine(loseControlCoroutine(duration));
+    }
+
+    private IEnumerator loseControlCoroutine(float duration) {
+        haveControl = false;
+        rb.velocity = new Vector3();
+
+        yield return new WaitForSeconds(duration);
+
+        haveControl = true;
     }
 }

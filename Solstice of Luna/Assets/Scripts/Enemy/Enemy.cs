@@ -11,9 +11,13 @@ public class Enemy : MonoBehaviour {
     public Transform defaultEnemy;
     private static List<Enemy> enemyList;
 
+    /* Events */
+    public event EventHandler OnTakeDamage;
+
     void Start() {
         healthSystem = new HealthSystem(100);
-        healthSystem.OnHealthOver += emitEnemyDie;
+        healthSystem.OnHealthOver += removeEnemy;
+        healthSystem.OnTakeDamage += emitTakeDamage;
 
         anim = GetComponent<Animator>();
 
@@ -50,9 +54,13 @@ public class Enemy : MonoBehaviour {
         healthSystem.damage(damage);
     }
 
-    private void emitEnemyDie(object sender, EventArgs e) {
+    private void removeEnemy(object sender, EventArgs e) {
         enemyList.Remove(this);
         Destroy(gameObject);
+    }
+
+    private void emitTakeDamage(object sender, EventArgs e) {
+        if (OnTakeDamage != null) OnTakeDamage(this, e);
     }
 
     public static Enemy GetClosestEnemy(Vector3 position, float range) {

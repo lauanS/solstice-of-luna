@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour {
             Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {
             return true;
         }
-            return false;
+        return false;
     }
 
     private void movement() {

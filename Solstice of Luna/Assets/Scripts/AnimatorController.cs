@@ -10,16 +10,25 @@ public class AnimatorController : MonoBehaviour {
     /* Components */
     private Animator anim;
     private SpriteRenderer rend;
-    private Player player;
+    public Player player;
+    public Enemy enemy;
     
     void Start() {
         anim = GetComponent<Animator>();
         player = GetComponent<Player>();
+        enemy = GetComponent<Enemy>();
 
         rend = GetComponent<SpriteRenderer>();
 
-        player.OnAttack += playAttack;
-        player.OnTakeDamage += playTakeDamage;
+        if (player != null) {
+            player.OnAttack += playAttack;
+            player.OnTakeDamage += playTakeDamage;
+        }
+
+        if (enemy != null) {
+            enemy.OnTakeDamage += playTakeDamage;
+        }
+        
     }
 
     private void playMovementAnim() {
