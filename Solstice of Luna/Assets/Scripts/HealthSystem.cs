@@ -39,12 +39,13 @@ public class HealthSystem {
 
         if (currentHealth - value <= 0) {
             currentHealth = 0;
+            emitHealthChanged();
             emitHealthOver();
             return;
         }
 
         currentHealth -= value;
-        emitHealthChanged();        
+        emitHealthChanged();
     }
 
     private void emitHealthChanged() {

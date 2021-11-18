@@ -26,7 +26,6 @@ public class KnockBack : MonoBehaviour {
 
         controller.loseControl(0.16f);
 
-        Debug.Log(direction);
         StartCoroutine(knockBackCoroutine(direction));
     }
 

@@ -8,6 +8,8 @@ public class Player : MonoBehaviour {
     private PlayerController controller;
     public Transform pfHealthBar;
 
+    public HealthBar healthBar;
+
     /* Events */
     public event EventHandler OnPlayerDie;
     public event EventHandler OnTakeDamage;
@@ -26,12 +28,20 @@ public class Player : MonoBehaviour {
         controller.OnAttack += emitAttack;
 
         // Setup da barra de vida
-        Vector3 healthBarPosition = gameObject.transform.position + new Vector3(0.4f, 0.1f, 0);
+        GameObject staticHealthBar = GameObject.FindGameObjectWithTag("HealthBar");
 
-        Transform healthBarTransform = Instantiate(pfHealthBar, healthBarPosition, Quaternion.identity);
-        HealthBar healthBar = healthBarTransform.GetComponent<HealthBar>();
+        if (staticHealthBar != null) {
+            // Setup da HealthBar estática na tela
+            healthBar = staticHealthBar.GetComponent<HealthBar>();
+        } else {
+            // Setup da HealthBar em cima do personagem
+            Vector3 healthBarPosition = gameObject.transform.position + new Vector3(0.4f, 0.1f, 0);
 
-        healthBar.transform.SetParent(gameObject.transform);
+            Transform healthBarTransform = Instantiate(pfHealthBar, healthBarPosition, Quaternion.identity);
+            healthBar = healthBarTransform.GetComponent<HealthBar>();
+
+            healthBar.transform.SetParent(gameObject.transform);
+        }
         
         healthBar.Setup(healthSystem);
     }
