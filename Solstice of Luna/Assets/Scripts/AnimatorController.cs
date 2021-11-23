@@ -9,6 +9,7 @@ public class AnimatorController : MonoBehaviour {
 
     /* Components */
     private Animator anim;
+    private Color regularColor;
     private SpriteRenderer rend;
     public Player player;
     public Enemy enemy;
@@ -19,6 +20,8 @@ public class AnimatorController : MonoBehaviour {
         enemy = GetComponent<Enemy>();
 
         rend = GetComponent<SpriteRenderer>();
+
+        regularColor = rend.material.color;
 
         if (player != null) {
             player.OnAttack += playAttack;
@@ -55,7 +58,6 @@ public class AnimatorController : MonoBehaviour {
     }
 
     private IEnumerator playTakeDamageAnim() {
-        Color regularColor = rend.material.color;
         Color flashColor = regularColor;
         flashColor.a = 0.5f;
 
