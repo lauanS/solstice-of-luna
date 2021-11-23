@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour {
 
     /* Events */
     public event EventHandler OnTakeDamage;
+    public event EventHandler OnAttack;
 
     void Start() {
         healthSystem = new HealthSystem(100);
@@ -46,6 +47,7 @@ public class Enemy : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Player") {
+            emitAttack();
             anim.SetTrigger("Attack");
         }
     }
@@ -57,6 +59,10 @@ public class Enemy : MonoBehaviour {
     private void removeEnemy(object sender, EventArgs e) {
         enemyList.Remove(this);
         Destroy(gameObject);
+    }
+
+    private void emitAttack() {
+        if (OnAttack != null) OnAttack(this, EventArgs.Empty);
     }
 
     private void emitTakeDamage(object sender, EventArgs e) {

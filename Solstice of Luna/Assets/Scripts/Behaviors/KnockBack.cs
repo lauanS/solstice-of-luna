@@ -18,13 +18,14 @@ public class KnockBack : MonoBehaviour {
         controller = GetComponent("EnemyIA") as EnemyIA;
 
         baseCharacter.OnTakeDamage += knockBack;
+        baseCharacter.OnAttack += knockBack;
     }
 
     public void knockBack(object sender, EventArgs e) {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Vector3 direction = (transform.position - player.transform.position).normalized;
 
-        controller.loseControl(0.16f);
+        controller.loseControl(0.8f);
 
         StartCoroutine(knockBackCoroutine(direction));
     }
@@ -33,7 +34,7 @@ public class KnockBack : MonoBehaviour {
         Vector3 force = direction * thrust;
 
         rb.velocity = force;
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.16f);
         rb.velocity = new Vector3();
     }
 }
