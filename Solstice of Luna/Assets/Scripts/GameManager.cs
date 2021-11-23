@@ -8,12 +8,24 @@ public class GameManager : MonoBehaviour {
     public Transform pfSlime;
     private GameObject player;
 
-    void Start() {
+    public bool gamePaused;
+
+    private void Start() {
         initGame();
     }
 
+    private void Update() {
+        if (Input.GetKeyUp(KeyCode.Escape)) {
+            tooglePauseMenu();
+        }
+    }
+
     private void initGame() {
+        gamePaused = false;
+        
         UtilsClass.Setup();
+
+        // Setup dos inimigos
         Enemy.Setup();
 
         Enemy slime = Enemy.Create(new Vector3(-19, -25, 0), pfSlime);
@@ -26,6 +38,7 @@ public class GameManager : MonoBehaviour {
         Enemy slime8 = Enemy.Create(new Vector3(9f, -25.9f, 0), pfSlime);
         Enemy slime9 = Enemy.Create(new Vector3(14f, -25.9f, 0), pfSlime);
 
+        // Setup do player
         player = GameObject.FindGameObjectWithTag("Player");
         Player playerScript = player.GetComponent<Player>();
 
@@ -48,11 +61,23 @@ public class GameManager : MonoBehaviour {
         gameOver();        
     }
 
+    public void tooglePauseMenu() {
+        if (gamePaused) {
+            playGame();
+            PauseMenuWindow.HidePauseMenu();
+        } else {
+            pauseGame();
+            PauseMenuWindow.ShowPauseMenu();
+        }
+    }
+
     public void pauseGame() {
+        gamePaused = true;
         Time.timeScale = 0f;
     }
 
     public void playGame() {
+        gamePaused = false;
         Time.timeScale = 1f;
     }
 }

@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     private enum State {
         Normal,
-        Attacking
+        Attacking,
+        Paused
     }
 
     public Rigidbody2D rb;
@@ -15,14 +16,17 @@ public class PlayerController : MonoBehaviour {
     Animator anim;
     
     private State state;
+    GameManager gameManager;
 
     public event EventHandler OnAttack;
     
-
     void Start() {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         speed = 3;
+        
+        GameObject gameManagerGO = GameObject.FindGameObjectWithTag("GameController");
+        gameManager = gameManagerGO.GetComponent<GameManager>();
 
         state = State.Normal;
     }
@@ -34,6 +38,8 @@ public class PlayerController : MonoBehaviour {
             attack();
             break;
         case State.Attacking:
+            break;
+        case State.Paused:
             break;
         } 
     }
@@ -85,6 +91,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void attack() {
+        if (gameManager.gamePaused) {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0)) {
             Vector3 mousePosition = UtilsClass.getMouseWorldPosition();
             Vector3 mouseDirection = (mousePosition - transform.position).normalized;

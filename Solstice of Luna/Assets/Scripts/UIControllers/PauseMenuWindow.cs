@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameOverWindow : MonoBehaviour {
-    private static GameOverWindow instance;
-
+public class PauseMenuWindow : MonoBehaviour {
+    private static PauseMenuWindow instance;
     private void Awake() {
         instance = this;
         hide();
@@ -18,11 +17,11 @@ public class GameOverWindow : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
-    public static void ShowGameOver() {
+    public static void ShowPauseMenu() {
         instance.show();
     }
 
-    public static void HideGameOver() {
+    public static void HidePauseMenu() {
         instance.hide();
     }
 }
