@@ -13,7 +13,7 @@ public class AnimatorController : MonoBehaviour {
     private SpriteRenderer rend;
     public Player player;
     public Enemy enemy;
-    
+
     void Start() {
         anim = GetComponent<Animator>();
         player = GetComponent<Player>();
@@ -31,7 +31,6 @@ public class AnimatorController : MonoBehaviour {
         if (enemy != null) {
             enemy.OnTakeDamage += playTakeDamage;
         }
-        
     }
 
     private void playMovementAnim() {
