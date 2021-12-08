@@ -51,9 +51,11 @@ public class AnimatorController : MonoBehaviour {
 
     private IEnumerator playAttackAnim() {
         anim.SetBool("isAttacking", true);
+        this.isAttacking = true;
 
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("isAttacking", false);
+        this.isAttacking = false;
     }
 
     private IEnumerator playTakeDamageAnim() {
