@@ -14,10 +14,12 @@ public class Enemy : MonoBehaviour {
     /* Events */
     public event EventHandler OnTakeDamage;
     public event EventHandler OnAttack;
+    public event EventHandler OnEnemyDie;
 
     void Start() {
         healthSystem = new HealthSystem(100);
         healthSystem.OnHealthOver += removeEnemy;
+        healthSystem.OnHealthOver += emitOnDie;
         healthSystem.OnTakeDamage += emitTakeDamage;
 
         anim = GetComponent<Animator>();
@@ -67,6 +69,10 @@ public class Enemy : MonoBehaviour {
 
     private void emitTakeDamage(object sender, EventArgs e) {
         if (OnTakeDamage != null) OnTakeDamage(this, e);
+    }
+
+    private void emitOnDie(object sender, EventArgs e) {
+        if (OnEnemyDie != null) OnEnemyDie(this, e);
     }
 
     public static Enemy GetClosestEnemy(Vector3 position, float range) {

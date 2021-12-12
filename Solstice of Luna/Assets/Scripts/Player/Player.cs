@@ -48,12 +48,19 @@ public class Player : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Enemy") {
-            takeDamage(25);
+            takeDamage(20);
+        }
+        if (collision.gameObject.tag == "LifeRegen") {
+            heal(10);
         }
     }
 
     public void takeDamage(int damage) {
         healthSystem.damage(damage);
+    }
+
+    public void heal(int value) {
+        healthSystem.heal(value);
     }
 
     private void emitPlayerDie(object sender, EventArgs e) {
