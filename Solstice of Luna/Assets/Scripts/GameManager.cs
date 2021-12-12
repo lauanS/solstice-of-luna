@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour {
     public Transform pfSlime;
+    public Transform pfCaucifer;
+
     private GameObject player;
 
     public bool gamePaused;
@@ -40,6 +42,8 @@ public class GameManager : MonoBehaviour {
 
             Enemy.Create(new Vector3(enemyPosX, enemyPosY, 0), pfSlime);
         }
+        Enemy.Create(new Vector3(3, -36, 0), pfCaucifer);
+        Enemy.Create(new Vector3(-6, -42, 0), pfCaucifer);
 
         // Setup do player
         player = GameObject.FindGameObjectWithTag("Player");

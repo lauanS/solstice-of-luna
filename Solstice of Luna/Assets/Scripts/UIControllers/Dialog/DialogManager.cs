@@ -17,7 +17,6 @@ public class DialogManager : MonoBehaviour {
 
     public void speach(string author, string text, Sprite profile) {
         // this.profile.image = profile;
-        Debug.Log("speach");
         this.author.text = author;
         this.text = text;
 
