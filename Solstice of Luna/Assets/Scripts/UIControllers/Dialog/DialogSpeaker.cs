@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DialogSpeaker : MonoBehaviour {
     public string author;
-    public string text;
+    public string[] text;
     public Sprite profile;
 
     public DialogManager dialogManager;
@@ -14,7 +14,6 @@ public class DialogSpeaker : MonoBehaviour {
     }
 
     public void interact() {
-        Debug.Log("interect");
         if (this.dialogManager != null) {
             this.dialogManager.speach(author, text, profile);
         }

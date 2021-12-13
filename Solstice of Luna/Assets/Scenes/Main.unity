@@ -47863,7 +47863,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   author: Luna
-  text: "Estou vendo minhas coisas l\xE1 embaixo"
+  text:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   profile: {fileID: 0}
   dialogManager: {fileID: 0}
 --- !u!1 &506077991
@@ -48682,7 +48719,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 450597584}
         m_TargetAssemblyTypeName: DialogManager, Assembly-CSharp
-        m_MethodName: closeDialog
+        m_MethodName: nextSentence
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -49411,7 +49448,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   author: Luna
-  text: Preciso entrar na ilha
+  text:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   profile: {fileID: 0}
   dialogManager: {fileID: 0}
 --- !u!1 &1020332023
@@ -49789,7 +49848,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Fechar
+  m_Text: '>>'
 --- !u!222 &1403753135
 CanvasRenderer:
   m_ObjectHideFlags: 0

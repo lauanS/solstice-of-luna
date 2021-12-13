@@ -9,25 +9,41 @@ public class DialogManager : MonoBehaviour {
     public Image profile;
 
     private float typingSpeed = 0.05f;
-    private string text;
+    private string[] text;
+    private int index;
 
     private void Start() {
-        this.speach("Luna", "Preciso descer!", null);
+        string[] speak = {"Preciso procurar meu diário!", "Ele deve estar por perto"};
+
+        this.speach("Luna", speak, null);
     }
 
-    public void speach(string author, string text, Sprite profile) {
+    public void speach(string author, string[] text, Sprite profile) {
         // this.profile.image = profile;
         this.author.text = author;
         this.text = text;
+
+        this.index = 0;
 
         this.gameObject.SetActive(true);
         StartCoroutine(typeSentence());
     }
 
     private IEnumerator typeSentence() {
-        foreach(char letter in text.ToCharArray()) {
+        foreach(char letter in text[index].ToCharArray()) {
             content.text += letter;
             yield return new WaitForSeconds(typingSpeed);
+        }
+    }
+
+    public void nextSentence() {
+        if (index < text.Length - 1){
+            index++;
+            content.text = "";
+
+            StartCoroutine(typeSentence());
+        } else {
+            this.closeDialog();
         }
     }
 
