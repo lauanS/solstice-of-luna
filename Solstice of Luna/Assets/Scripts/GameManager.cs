@@ -64,6 +64,10 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void endGame() {
+        this.gameOver();
+    }
+
     private void callOnPlayerDie(object sender, EventArgs e) {
         gameOver();        
     }
