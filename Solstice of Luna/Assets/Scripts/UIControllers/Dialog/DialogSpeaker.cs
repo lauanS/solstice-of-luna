@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DialogSpeaker : MonoBehaviour {
     public string author;
-    public string[] text = {"Luna, preciso da sua ajuda", "Estarei de esperando na Ilha Momish", "- S"};
+    public string[] text = {};
     public Sprite profile;
 
     private DialogManager dialogManager;

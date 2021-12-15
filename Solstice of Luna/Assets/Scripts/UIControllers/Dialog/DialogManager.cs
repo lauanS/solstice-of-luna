@@ -16,6 +16,7 @@ public class DialogManager : MonoBehaviour {
 
     private string[] text;
     private int index;
+    public Sprite defaultProfile;
 
     private void Start() {
         gameManager = FindObjectOfType<GameManager>();
@@ -26,7 +27,12 @@ public class DialogManager : MonoBehaviour {
     }
 
     public void speach(string author, string[] text, Sprite profile) {
-        // this.profile.image = profile;   
+        if (profile != null) {
+            this.profile.sprite = profile;
+        } else {
+            this.profile.sprite = defaultProfile;
+        }
+
         gameManager.pauseActions();
 
         this.author.text = author;
