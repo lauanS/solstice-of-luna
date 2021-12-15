@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
 
     private GameObject player;
 
-    public bool gamePaused;
+    public bool gamePaused = false;
 
     private void Start() {
         initGame();
@@ -23,9 +23,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private void initGame() {
-        gamePaused = false;
-        
+    private void initGame() {  
         UtilsClass.Setup();
 
         // Setup dos inimigos
@@ -91,4 +89,14 @@ public class GameManager : MonoBehaviour {
         gamePaused = false;
         Time.timeScale = 1f;
     }
+
+    public void pauseActions() {
+        gamePaused = true;
+    }
+
+    public void playActions() {
+        gamePaused = false;
+    }
+
+    
 }

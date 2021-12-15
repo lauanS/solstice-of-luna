@@ -8,18 +8,24 @@ public class DialogManager : MonoBehaviour {
     public Text content;
     public Image profile;
 
+    private GameManager gameManager;
+
     private float typingSpeed = 0.05f;
     private string[] text;
     private int index;
 
     private void Start() {
+        gameManager = FindObjectOfType<GameManager>();
+
         string[] speak = {"Preciso procurar meu diário!", "Ele deve estar por perto"};
 
         this.speach("Luna", speak, null);
     }
 
     public void speach(string author, string[] text, Sprite profile) {
-        // this.profile.image = profile;
+        // this.profile.image = profile;   
+        gameManager.pauseActions();
+
         this.author.text = author;
         this.text = text;
 
@@ -48,6 +54,7 @@ public class DialogManager : MonoBehaviour {
     }
 
     public void closeDialog() {
+        gameManager.playActions();
         this.gameObject.SetActive(false);
     }
 }
