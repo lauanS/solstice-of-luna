@@ -11,6 +11,9 @@ public class DialogManager : MonoBehaviour {
     private GameManager gameManager;
 
     private float typingSpeed = 0.05f;
+    private bool typing = false;
+    private IEnumerator currentTypeCourotine;
+
     private string[] text;
     private int index;
 
@@ -32,22 +35,32 @@ public class DialogManager : MonoBehaviour {
         this.index = 0;
 
         this.gameObject.SetActive(true);
-        StartCoroutine(typeSentence());
+        currentTypeCourotine = typeSentence();
+        StartCoroutine(currentTypeCourotine);
     }
 
     private IEnumerator typeSentence() {
+        typing = true;
+
         foreach(char letter in text[index].ToCharArray()) {
             content.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
+        typing = false;
     }
 
     public void nextSentence() {
-        if (index < text.Length - 1){
+        if (typing) {
+            StopCoroutine(currentTypeCourotine);
+            typing = false;
+        }
+
+        if (index < text.Length - 1) {
             index++;
             content.text = "";
 
-            StartCoroutine(typeSentence());
+            currentTypeCourotine = typeSentence();
+            StartCoroutine(currentTypeCourotine);
         } else {
             this.closeDialog();
         }
@@ -55,6 +68,11 @@ public class DialogManager : MonoBehaviour {
 
     public void closeDialog() {
         gameManager.playActions();
+
+        index = 0;
+        author.text = "";
+        content.text = "";
+
         this.gameObject.SetActive(false);
     }
 }
