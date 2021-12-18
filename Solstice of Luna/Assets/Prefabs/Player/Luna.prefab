@@ -141,7 +141,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.009453714, y: -0.07878056}
+  m_Offset: {x: 0.009453714, y: 0.11025724}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -152,7 +152,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24650061, y: 0.53326637}
+  m_Size: {x: 0.24650061, y: 0.91134197}
   m_EdgeRadius: 0
 --- !u!114 &8599696940751692241
 MonoBehaviour:
@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pfHealthBar: {fileID: 3989126087688655838, guid: 77ec34e5621626e43a652ab915fa4b97, type: 3}
+  healthBar: {fileID: 0}
 --- !u!114 &4285573485472397340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,4 +197,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWalking: 0
   isAttacking: 0
-  speed: 0
+  player: {fileID: 0}
+  enemy: {fileID: 0}

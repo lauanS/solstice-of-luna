@@ -33,10 +33,12 @@ public class DialogManager : MonoBehaviour {
             this.profile.sprite = defaultProfile;
         }
 
+        stopType();
         gameManager.pauseActions();
 
         this.author.text = author;
         this.text = text;
+        this.content.text = "";
 
         this.index = 0;
 
@@ -56,10 +58,7 @@ public class DialogManager : MonoBehaviour {
     }
 
     public void nextSentence() {
-        if (typing) {
-            StopCoroutine(currentTypeCourotine);
-            typing = false;
-        }
+        stopType();
 
         if (index < text.Length - 1) {
             index++;
@@ -80,5 +79,12 @@ public class DialogManager : MonoBehaviour {
         content.text = "";
 
         this.gameObject.SetActive(false);
+    }
+
+    private void stopType() {
+        if (typing) {
+            StopCoroutine(currentTypeCourotine);
+            typing = false;
+        }
     }
 }
