@@ -1,6 +1,8 @@
 using System;
 public class HealthSystem {
     public event EventHandler OnHealthChanged;
+    public event EventHandler OnHealthOver;
+    public event EventHandler OnTakeDamage;
 
     private int healthMax;
     private int currentHealth;
@@ -33,16 +35,29 @@ public class HealthSystem {
     }
 
     public void damage (int value) {
-        if (currentHealth - value < 0) {
+        emitTakeDamage();
+
+        if (currentHealth - value <= 0) {
             currentHealth = 0;
+            emitHealthChanged();
+            emitHealthOver();
             return;
         }
+
         currentHealth -= value;
-        emitHealthChanged();        
+        emitHealthChanged();
     }
 
     private void emitHealthChanged() {
         if (OnHealthChanged != null) OnHealthChanged(this, EventArgs.Empty);
+    }
+
+    private void emitHealthOver() {
+        if (OnHealthOver != null) OnHealthOver(this, EventArgs.Empty);
+    }
+
+    private void emitTakeDamage() {
+        if (OnTakeDamage != null) OnTakeDamage(this, EventArgs.Empty);
     }
 
 }
